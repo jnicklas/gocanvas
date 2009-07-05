@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>Uncharted</title>
+    <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="gocanvas.js" type="text/javascript" charset="utf-8"></script>
+    <script src="gochart.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+      $(function() {
+        var canvas = Canvas('#chart');
+
+        var plot = canvas.pane(100, 100).fill('#eee').move(20, 20);
+
+        var line = plot.line([[0, 20], [20, 70], [40, 100], [60, 90]]).stroke(4);
+
+        var earth = canvas.circle(20).position(100, 200).fill('#0000ff');
+        var moon = earth.circle(5).fill('#cccc00').move(50, 0);
+        var asteroid = moon.circle(2).fill('#000000').move(15, 0);
+
+        canvas.flipVertical();
+        canvas.move(0, canvas.height);
+
+        canvas.redraw();
+
+        setInterval(function() {
+          earth.rotate(1);
+          moon.rotate(3);
+          asteroid.move(0.2,0);
+          canvas.redraw();
+        }, 50);
+
+      });
+    //]]>
+    </script>
+    <style type="text/css" media="screen">
+      #chart {
+        margin: 20px;
+        width: 300px;
+        height: 250px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="chart">
+      
+    </div>
+    
+    <p>
+      <a href="#" id="start">Start</a> |
+      <a href="#" id="stop">Stop</a>
+    </p>
+  </body>
+</html>
