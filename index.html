@@ -11,28 +11,9 @@
     <script type="text/javascript" charset="utf-8">
     //<![CDATA[
       $(function() {
-        var canvas = Canvas('#chart');
-
-        var plot = canvas.pane(100, 100).fill('#eee').move(20, 20);
-
-        var line = plot.line([[0, 20], [20, 70], [40, 100], [60, 90]]).stroke(4);
-
-        var earth = canvas.circle(20).position(100, 200).fill('#0000ff');
-        var moon = earth.circle(5).fill('#cccc00').move(50, 0);
-        var asteroid = moon.circle(2).fill('#000000').move(15, 0);
-
-        canvas.flipVertical();
-        canvas.move(0, canvas.height);
-
-        canvas.redraw();
-
-        setInterval(function() {
-          earth.rotate(1);
-          moon.rotate(3);
-          asteroid.move(0.2,0);
-          canvas.redraw();
-        }, 50);
-
+        var chart = Chart('#chart');
+        var series = chart.series([[0, 20], [20, 70], [40, 100], [60, 90], [90, 40], [100, 90]]);
+        chart.redraw();
       });
     //]]>
     </script>

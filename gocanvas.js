@@ -172,6 +172,40 @@ Canvas.Circle = function(radius) {
   return self;
 };
 
+Canvas.Utils = {
+  map: function(list, fun) {
+    return $(list).map(fun);
+  },
+  max: function(list) {
+    var max = 0;
+    $(list).each(function(i, el) {
+      if(el && el > max) max = el;
+    });
+    return max;
+  }
+};
+
+Canvas.Points = function(points) {
+  var self = {};
+  self.points = points;
+  self.xmax = function() {
+    return Canvas.Utils.max(self.x());
+  };
+  self.x = function() {
+    return Canvas.Utils.map(self.points, function() { return this[0]; });
+  };
+  self.xstart = function() {
+    return self.points[0][0];
+  };
+  self.ystart = function() {
+    return self.points[0][1];
+  };
+  self.each = function(fun) {
+    $(self.points).each(fun);
+  };
+  return self;
+};
+
 Canvas.Line = function(points) {
   var self = Canvas.Shape(function(context) {
     context.moveTo(self.points[0][0], self.points[0][1]);
