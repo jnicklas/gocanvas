@@ -10,12 +10,8 @@ var Canvas = function(element) {
   self.element.append(self.canvas);
   self.context = self.canvas.get(0).getContext('2d');
 
-  self.clear = function() {
-    self.context.clearRect(0,0,self.width,self.height);
-  };
-
   self.redraw = function() {
-    self.clear();
+    self.context.clearRect(0,0,self.width,self.height);
     self.draw(self.context);
   };
   return self;
@@ -42,6 +38,9 @@ Canvas.Object = function(draw) {
       this.draw(context);
     });
     context.restore();
+  };
+  self.clear = function() {
+    self.objects = [];
   };
   self.move = function(x, y) {
     self.x += x;
@@ -112,8 +111,8 @@ Canvas.Pane = function(width, height) {
     if(self.strokeStyle) context.strokeStyle = self.strokeStyle;
     if(self.fillStyle) context.fillStyle = self.fillStyle;
     
-    if(self.useStroke) context.strokeRect(0, 0, self.width, self.height);
     if(self.useFill) context.fillRect(0, 0, self.width, self.height);
+    if(self.useStroke) context.strokeRect(0, 0, self.width, self.height);
     context.restore();
   });
   self.width = width;
@@ -144,8 +143,8 @@ Canvas.Shape = function(draw) {
     if(self.fillStyle) context.fillStyle = self.fillStyle;
     context.beginPath();
     draw.call(this, context);
-    if(self.useStroke) context.stroke();
     if(self.useFill) context.fill();
+    if(self.useStroke) context.stroke();
     context.closePath();
     context.restore();
   });
@@ -188,14 +187,20 @@ Canvas.Utils = {
 Canvas.Points = function(points) {
   var self = {};
   self.points = points;
-  self.xmax = function() {
-    return Canvas.Utils.max(self.x());
-  };
   self.x = function() {
     return Canvas.Utils.map(self.points, function() { return this[0]; });
   };
+  self.xmax = function() {
+    return Canvas.Utils.max(self.x());
+  };
   self.xstart = function() {
     return self.points[0][0];
+  };
+  self.y = function() {
+    return Canvas.Utils.map(self.points, function() { return this[1]; });
+  };
+  self.ymax = function() {
+    return Canvas.Utils.max(self.y());
   };
   self.ystart = function() {
     return self.points[0][1];

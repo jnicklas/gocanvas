@@ -12,8 +12,25 @@
     //<![CDATA[
       $(function() {
         var chart = Chart('#chart');
-        var series = chart.series([[0, 20], [20, 70], [40, 100], [60, 90], [90, 40], [100, 90]]);
+        var series = chart.series([[0, 20], [20, 0], [40, 100], [60, 90], [80, 40], [100, 90]]);
         chart.redraw();
+        
+        $('#start').click(function() {
+          var list = [];
+          for(var i = 0; i < 6; i++) {
+            list.push([i * 20, parseInt(Math.random() * 100)]);
+          }
+          chart.series(list);
+          chart.redraw();
+          return false;
+        });
+        
+        $('#stop').click(function() {
+          chart.clear();
+          chart.redraw();
+          return false;
+        });
+        
       });
     //]]>
     </script>
@@ -32,8 +49,8 @@
     </div>
     
     <p>
-      <a href="#" id="start">Start</a> |
-      <a href="#" id="stop">Stop</a>
+      <a href="#" id="start">Add</a> |
+      <a href="#" id="stop">Clear</a>
     </p>
   </body>
 </html>
