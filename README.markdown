@@ -1,7 +1,7 @@
-GoChart
-=======
+GoCanvas
+========
 
-GoChart is a library for drawing on HTML5 "canvas" elements in an object-centric
+GoCanvas is a library for drawing on HTML5 "canvas" elements in an object-centric
 way. It is inspired by (and for now depends on) the jQuery library.
 
 It's *extremely* experimental, untested and generally unfinished. It's basically
@@ -45,3 +45,9 @@ it and an asteroid circling around the moon, slowly leaving orbit.
       asteroid.move(0.1,0);
       canvas.redraw();
     }, 50);
+
+GoChart
+=======
+
+GoChart is a library for drawing charts using the HTML canvas API and the
+GoCanvas library. It's even more experimental :P
